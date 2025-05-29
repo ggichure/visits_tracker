@@ -98,18 +98,11 @@ class _CreateVisistsViewState extends State<CreateVisistsView> {
                 ),
                 // visit date
                 GestureDetector(
-                  onTap: () {
-                    showDatePicker(
-                      context: context,
-                      firstDate: DateTime(1900),
-                      lastDate: DateTime.now(),
-                    ).then((selected) {
-                      setState(() {
-                        dateSelected = selected;
-                        visitDateController.text =
-                            DateFormat.yMMMEd().format(selected!);
-                      });
-                    });
+                  onTap: () async {
+                    final selectedDateTime = await context.pickDateTime();
+                    dateSelected = selectedDateTime;
+                    visitDateController.text =
+                        DateFormat('yyyy-MM-dd h:mm').format(selectedDateTime!);
                   },
                   child: CustomTextInput(
                     suffixIcon: const Icon(Icons.calendar_month),
@@ -252,6 +245,44 @@ class _CreateVisistsViewState extends State<CreateVisistsView> {
           ),
         ),
       ),
+    );
+  }
+}
+
+extension DateTimePickerExtension on BuildContext {
+  /// Shows a date picker first, then a time picker.
+  /// Returns a combined DateTime or null if user cancels any picker.
+  Future<DateTime?> pickDateTime({
+    DateTime? initialDate,
+    DateTime? firstDate,
+    DateTime? lastDate,
+    TimeOfDay? initialTime,
+  }) async {
+    final DateTime now = DateTime.now();
+
+    final DateTime? pickedDate = await showDatePicker(
+      context: this,
+      initialDate: initialDate ?? now,
+      firstDate: firstDate ?? DateTime(1900),
+      lastDate: lastDate ?? now,
+    );
+
+    if (pickedDate == null) return null; // User canceled date picker
+
+    final TimeOfDay? pickedTime = await showTimePicker(
+      context: this,
+      initialTime: initialTime ?? TimeOfDay.fromDateTime(now),
+    );
+
+    if (pickedTime == null) return null; // User canceled time picker
+
+    // Combine picked date & time into one DateTime
+    return DateTime(
+      pickedDate.year,
+      pickedDate.month,
+      pickedDate.day,
+      pickedTime.hour,
+      pickedTime.minute,
     );
   }
 }
