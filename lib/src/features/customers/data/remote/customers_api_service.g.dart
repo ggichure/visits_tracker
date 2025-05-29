@@ -18,12 +18,12 @@ class _CustomersApiService implements CustomersApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<List<Customer>> getCustomer() async {
+  Future<List<CustomerModel>> getCustomer() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<Customer>>(
+    final _options = _setStreamType<List<CustomerModel>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -34,10 +34,10 @@ class _CustomersApiService implements CustomersApiService {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<Customer> _value;
+    late List<CustomerModel> _value;
     try {
       _value = _result.data!
-          .map((dynamic i) => Customer.fromJson(i as Map<String, dynamic>))
+          .map((dynamic i) => CustomerModel.fromJson(i as Map<String, dynamic>))
           .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -47,12 +47,12 @@ class _CustomersApiService implements CustomersApiService {
   }
 
   @override
-  Future<List<Activity>> getActivities() async {
+  Future<List<ActivityModel>> getActivities() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<Activity>>(
+    final _options = _setStreamType<List<ActivityModel>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -63,10 +63,10 @@ class _CustomersApiService implements CustomersApiService {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<Activity> _value;
+    late List<ActivityModel> _value;
     try {
       _value = _result.data!
-          .map((dynamic i) => Activity.fromJson(i as Map<String, dynamic>))
+          .map((dynamic i) => ActivityModel.fromJson(i as Map<String, dynamic>))
           .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -76,7 +76,7 @@ class _CustomersApiService implements CustomersApiService {
   }
 
   @override
-  Future<List<Visit>> getVisits(String filter, {String? orderBy}) async {
+  Future<List<VisitModel>> getVisits(String filter, {String? orderBy}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'customer_id': filter,
@@ -85,7 +85,7 @@ class _CustomersApiService implements CustomersApiService {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<Visit>>(
+    final _options = _setStreamType<List<VisitModel>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -96,10 +96,10 @@ class _CustomersApiService implements CustomersApiService {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<Visit> _value;
+    late List<VisitModel> _value;
     try {
       _value = _result.data!
-          .map((dynamic i) => Visit.fromJson(i as Map<String, dynamic>))
+          .map((dynamic i) => VisitModel.fromJson(i as Map<String, dynamic>))
           .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -109,7 +109,7 @@ class _CustomersApiService implements CustomersApiService {
   }
 
   @override
-  Future<void> postVisit(Visit? visit) async {
+  Future<void> postVisit(VisitModel? visit) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);

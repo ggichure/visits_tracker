@@ -14,7 +14,8 @@ class ActivitiesRepoImpl implements AbstractActivityRepository {
   Future<Either<Failure, List<Activity>?>> getActivities() async {
     try {
       final result = await customersApiService.getActivities();
-      return Right(result);
+      final activities = result.map((model) => model.toEntity()).toList();
+      return Right(activities);
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message, e.statusCode));
     } catch (e) {

@@ -14,7 +14,8 @@ class CustomerRepoImpl implements AbstractCustomerRepository {
   Future<Either<Failure, List<Customer>?>> getCustomers() async {
     try {
       final result = await customersApiService.getCustomer();
-      return Right(result);
+      final customers = result.map((model) => model.toEntity()).toList();
+      return Right(customers);
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message, e.statusCode));
     } catch (e) {

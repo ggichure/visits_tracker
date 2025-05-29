@@ -4,6 +4,7 @@ import 'package:visits_tracker/src/core/network/exceptions.dart';
 import 'package:visits_tracker/src/core/network/failures.dart';
 import 'package:visits_tracker/src/features/customers/customers.dart'
     show AbstractVisitsRepository, CustomersApiService;
+import 'package:visits_tracker/src/features/customers/data/models/visit/visit_model.dart';
 import 'package:visits_tracker/src/features/customers/domain/entities/visit/visit.dart';
 
 @Injectable(as: AbstractVisitsRepository)
@@ -19,7 +20,8 @@ class VisitsRepoImpl implements AbstractVisitsRepository {
         customerId != null ? 'eq.$customerId' : '',
         orderBy: 'visit_date.desc',
       );
-      return Right(result);
+      final visists = result.map((model) => model.toEntity()).toList();
+      return Right(visists);
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message, e.statusCode));
     } catch (e) {
@@ -30,7 +32,8 @@ class VisitsRepoImpl implements AbstractVisitsRepository {
   @override
   Future<Either<Failure, void>> postVisits(Visit? visit) async {
     try {
-      final result = await customersApiService.postVisit(visit);
+      final result =
+          await customersApiService.postVisit(VisitModel.fromEntity(visit!));
       return Right(result);
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message, e.statusCode));
