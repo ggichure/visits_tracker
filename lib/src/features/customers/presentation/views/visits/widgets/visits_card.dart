@@ -5,8 +5,7 @@ import 'package:visits_tracker/src/features/customers/customers.dart'
 
 class VisitsCard extends StatelessWidget {
   const VisitsCard({
-    super.key,
-    required this.visit,
+    required this.visit, super.key,
   });
 
   final Visit? visit;

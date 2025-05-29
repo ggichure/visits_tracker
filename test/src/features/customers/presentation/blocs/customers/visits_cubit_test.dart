@@ -15,9 +15,9 @@ class MockPostVisitsUseCase extends Mock implements PostVisitsUseCase {}
 class MockVisit extends Mock implements Visit {}
 
 class MockFailure extends Equatable implements Exception {
-  final String errorMessage;
 
   const MockFailure(this.errorMessage);
+  final String errorMessage;
 
   @override
   List<Object?> get props => [errorMessage];
@@ -27,7 +27,7 @@ void main() {
   setUpAll(() {
     registerFallbackValue(const Right<MockFailure, List<Visit>?>([]));
     registerFallbackValue(
-        const Left<MockFailure, List<Visit>?>(MockFailure('error')));
+        const Left<MockFailure, List<Visit>?>(MockFailure('error')),);
     registerFallbackValue(const Right<MockFailure, void>(null));
     registerFallbackValue(const Left<MockFailure, void>(MockFailure('error')));
   });
@@ -129,7 +129,7 @@ void main() {
         'emits [VisitsLoading, VisitsError] when GetVisitsUseCase returns a Failure.',
         build: () {
           when(() => mockGetVisitsUseCase.call(any())).thenAnswer((_) async =>
-              const Left(GeneralException('Failed to fetch visits')));
+              const Left(GeneralException('Failed to fetch visits')),);
           return visitsCubit;
         },
         act: (cubit) => cubit.getVisits(customerId: tCustomerId),
@@ -179,7 +179,7 @@ void main() {
         'emits [VisitsLoading, VisitsError] when PostVisitsUseCase returns a Failure.',
         build: () {
           when(() => mockPostVisitsUseCase.call(any())).thenAnswer((_) async =>
-              const Left(GeneralException('Failed to post visit')));
+              const Left(GeneralException('Failed to post visit')),);
           return visitsCubit;
         },
         act: (cubit) => cubit.postVisit(tConcreteVisit),
@@ -214,11 +214,11 @@ void main() {
           expect: () => [
                 VisitsLoading(),
                 const VisitsError(
-                    'Exception: Null visit not allowed by use case'),
+                    'Exception: Null visit not allowed by use case',),
               ],
           verify: (_) {
             verify(() => mockPostVisitsUseCase.call(null)).called(1);
-          });
+          },);
     });
   });
 }

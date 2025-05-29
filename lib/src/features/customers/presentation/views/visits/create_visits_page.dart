@@ -258,9 +258,9 @@ extension DateTimePickerExtension on BuildContext {
     DateTime? lastDate,
     TimeOfDay? initialTime,
   }) async {
-    final DateTime now = DateTime.now();
+    final now = DateTime.now();
 
-    final DateTime? pickedDate = await showDatePicker(
+    final pickedDate = await showDatePicker(
       context: this,
       initialDate: initialDate ?? now,
       firstDate: firstDate ?? DateTime(1900),
@@ -269,7 +269,7 @@ extension DateTimePickerExtension on BuildContext {
 
     if (pickedDate == null) return null; // User canceled date picker
 
-    final TimeOfDay? pickedTime = await showTimePicker(
+    final pickedTime = await showTimePicker(
       context: this,
       initialTime: initialTime ?? TimeOfDay.fromDateTime(now),
     );
