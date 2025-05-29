@@ -1,0 +1,78 @@
+version: "3"
+
+tasks:
+  run:dev:
+    help: Run in development flavor
+    cmds:
+      - flutter run --flavor development --target=lib/main_development.dart
+
+  run:stg:
+    help: Run in staging flavor
+    cmds:
+      - flutter run --flavor staging --target=lib/main_staging.dart
+
+  run:prod:
+    help: Run in production flavor
+    cmds:
+      - flutter run --flavor production --target=lib/main_production.dart
+  gen_l10n:
+    help: Generate translation files
+      - flutter gen-l10n 
+  clean:
+    help: Clean project
+    cmds:
+      - flutter clean
+      - flutter packages get
+      - dart run build_runner build --delete-conflicting-outputs
+  sort:
+    help: sorts project dependencies
+    cmds:
+      - dart run pubspec_dependency_sorter
+  get:
+    help: Retrieve project dependencies
+    cmds:
+      - flutter packages get
+
+  build_runner:
+    help: Run build_runner
+    cmds:
+      - dart run build_runner build --delete-conflicting-outputs
+  release:
+    help: Build an appbundle for release
+    deps: [clean, gen_l10n]
+    cmds:
+      - flutter build appbundle --release --flavor production --target lib/main_production.dart
+  
+  release:distribution:
+    help: Build an apks for release/distribution 
+    deps: [clean, gen_l10n]
+    cmds:
+      - flutter build apk --release --flavor production --target lib/main_production.dart
+
+  release:staging:
+    deps: [clean]
+    cmds:
+      - flutter build  apk --release  --flavor staging --target lib/main_staging.dart
+
+  l10n:
+    help: gen l10n strings
+    cmds:
+      - flutter gen-l10n 
+  splash_screen:
+    cmds:
+      - dart run flutter_native_splash:create --flavor production   
+      - dart run flutter_native_splash:create --flavor staging   
+      - dart run flutter_native_splash:create --flavor development 
+
+  icons:
+    cmds:
+      - dart run flutter_launcher_icons :create 
+  tools:
+    help: Install necessary helpers
+    cmds:
+      - dart pub global activate flutterfire_cli
+      - dart pub global activate pubspec_dependency_sorter
+      - dart pub global activate arb_utils 
+      - dart pub global activate flutter_gen
+    #  - dart pub global activate intl_utils
+  

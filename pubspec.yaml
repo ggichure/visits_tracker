@@ -1,0 +1,47 @@
+name: visits_tracker
+description: A Very Good Project created by Very Good CLI.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  auto_route: ^10.1.0+1
+  bloc: ^9.0.0
+  dartz: ^0.10.1
+  dio: ^5.8.0+1
+  envied: ^1.1.1
+  equatable: ^2.0.7
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^9.1.1
+  flutter_localizations:
+    sdk: flutter
+  flutter_svg: ^2.1.0
+  get_it: ^8.0.3
+  injectable: ^2.5.0
+  intl: 
+  json_annotation: ^4.9.0
+  pretty_dio_logger: 
+  retrofit: ^4.4.2
+  toastification: ^3.0.2
+
+dev_dependencies:
+  auto_route_generator:
+  bloc_test: ^10.0.0
+  build_runner: ^2.4.15
+  envied_generator: ^1.1.1
+  flutter_test:
+    sdk: flutter
+  injectable_generator: ^2.7.0
+  json_serializable: ^6.9.5
+  mocktail: ^1.0.4
+  retrofit_generator: ^9.2.0
+  very_good_analysis: ^8.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets: 
+    - assets/

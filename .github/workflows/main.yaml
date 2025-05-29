@@ -1,0 +1,86 @@
+name: visits_tracker
+
+concurrency:
+  group: $-$
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  semantic-pull-request:
+    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/semantic_pull_request.yml@v1
+
+  build:
+    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
+    with:
+      flutter_channel: stable
+
+  spell-check:
+    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/spell_check.yml@v1
+    with:
+      includes: |
+        **/*.md
+      modified_files_only: false
+
+  test:
+    name: Run Flutter Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.0' 
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run analyzer
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test --coverage
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+          
+
+  linting:
+      name: Linting & Formatting
+      runs-on: ubuntu-latest
+
+      steps:
+        - uses: actions/checkout@v3
+          with:  
+            submodules: 'recursive'
+
+        - uses: subosito/flutter-action@v2
+          with:
+            flutter-version: '3.32.x'
+            channel: "stable"
+            cache: true
+            cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:' 
+            cache-path: '${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:' 
+            architecture: x64 # optional, x64 or arm64
+
+
+        - name: Formatting
+          run: dart format -o none --set-exit-if-changed -l 200 lib
+
+        - name: Linting
+          # ignore info and warnings when performing this step
+          run: flutter analyze --no-fatal-infos --no-fatal-warnings
+
+

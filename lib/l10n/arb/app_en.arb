@@ -1,0 +1,51 @@
+{
+  "@@locale": "en",
+  "counterAppBarTitle": "Counter",
+  "@counterAppBarTitle": {
+    "description": "Title displayed in the app bar of the Counter page"
+  },
+  "customers": "{count, plural, zero {Customer} one {Customer} other {Customers}}",
+  "@customers": {
+    "description": "Label used to show the number of customers, with proper pluralization"
+  },
+  "visits": "Visits",
+  "@visits": {
+    "description": "Label displayed for the 'Visits' section or item"
+  },
+  "activities": "{count, plural, zero {Activity} one {Activity} other {Activities}}",
+  "@activities": {
+    "description": "Label used to show the number of activities, with proper pluralization"
+  },
+  "recordAVisit": "Record a visit",
+  "@recordAVisit": {
+    "description": "Button label for initiating the process of recording a visit"
+  },
+  "recordVisitSuccess": "Visit recorded successfully",
+  "@recordVisitSuccess": {
+    "description": "Confirmation message displayed after a visit is recorded"
+  },
+  "generalError": "Unknown error occurred",
+  "@generalError": {
+    "description": "Generic error message shown when an unspecified error happens"
+  },
+  "location":"Address",
+  "@location":{
+    "description": "Address or coordinates for where the visit took place"
+  },
+  "notes":"Notes",
+  "@notes":{
+    "description": "Free-form notes entered by the user (string)"
+  },
+   "visitDate":"Vist date",
+  "@visitDate":{
+    "description": "Date and time of the visit (ISO 8601 string)"
+  },
+  "activitiesDone":"Activities Done",
+  "@activitiesDone":{
+    "description": "Activities Done"
+  },
+  "required_":"This field is required",
+  "@required_":{"description": "Indicates a field cannot be null"}
+
+
+}
