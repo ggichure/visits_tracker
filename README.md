@@ -33,7 +33,7 @@ $ flutter run --flavor staging --target lib/main_staging.dart
 $ flutter run --flavor production --target lib/main_production.dart
 ```
 
-shorthands 
+shorthands using [TaskFile](https://taskfile.dev/)
 ```sh
 * build_runner:               
 * clean:                      
