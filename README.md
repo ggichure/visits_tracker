@@ -7,6 +7,11 @@
 
 ---
 
+| Customers Page      |  Visits Page     | Add visists      |
+|--------------------|--------------------|------------------|
+| ![Customers Page](./screenshots/2.png) | ![ Activities Page](./screenshots/1.png) | ![Add Activities](./screenshots/3.png) |
+
+
 ## Getting Started 🚀
 
 This project contains 3 flavors:
