@@ -74,7 +74,7 @@ Follow these steps to run locally:
    cd visits_tracker
     ```
 
-2. **Clone the Repository**  
+2. **Get Dependencies**  
    ``` sh
       flutter pub get
    ```
