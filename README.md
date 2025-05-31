@@ -11,7 +11,11 @@
 |--------------------|--------------------|------------------|
 | ![Customers Page](./screenshots/2.png) | ![ Activities Page](./screenshots/1.png) | ![Add Activities](./screenshots/3.png) |
 
+---
 
+<img src="./screenshots/date_time.gif" alt="Date Time Picker Demo" />
+<br>
+---
 
 shorthands using [TaskFile](https://taskfile.dev/)
 ```sh
@@ -147,57 +151,6 @@ $ open coverage/index.html
  - Prioritized clean architecture for long-term maintainability, accepting longer initial development time over quick prototyping.
 
 
-<img src="./screenshots/date_time.gif" alt="Date Time Picker Demo" />
-<br>
--
-
-
-```dart
-
-extension DateTimePickerExtension on BuildContext {
-  /// Shows a date picker first, then a time picker.
-  /// Returns a combined DateTime or null if user cancels any picker.
-  Future<DateTime?> pickDateTime({
-    DateTime? initialDate,
-    DateTime? firstDate,
-    DateTime? lastDate,
-    TimeOfDay? initialTime,
-  }) async {
-    final DateTime now = DateTime.now();
-
-    final DateTime? pickedDate = await showDatePicker(
-      context: this,
-      initialDate: initialDate ?? now,
-      firstDate: firstDate ?? DateTime(1900),
-      lastDate: lastDate ?? now,
-    );
-
-    if (pickedDate == null) return null; // User canceled date picker
-
-    final TimeOfDay? pickedTime = await showTimePicker(
-      context: this,
-      initialTime: initialTime ?? TimeOfDay.fromDateTime(now),
-    );
-
-    if (pickedTime == null) return null; // User canceled time picker
-
-    // Combine picked date & time into one DateTime
-    return DateTime(
-      pickedDate.year,
-      pickedDate.month,
-      pickedDate.day,
-      pickedTime.hour,
-      pickedTime.minute,
-    );
-  }
-}
-
-```
-
-sample usage
-```dart
- DateTime? selectedDateTime = await context.pickDateTime();
- ```
 
 
 # Implementation
