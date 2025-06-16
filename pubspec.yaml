@@ -30,7 +30,7 @@ dependencies:
 dev_dependencies:
   auto_route_generator:
   bloc_test: ^10.0.0
-  build_runner: ^2.4.15
+  build_runner: ^2.5.0
   envied_generator: ^1.1.1
   flutter_test:
     sdk: flutter
